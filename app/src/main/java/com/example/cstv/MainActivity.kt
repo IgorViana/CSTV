@@ -10,8 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.cstv.ui.navigation.Navigation
+import com.example.cstv.ui.navigation.NavigationScreens
+import com.example.cstv.ui.screen.main.MainScreen
+import com.example.cstv.ui.screen.matchDetail.MatchDetailScreen
+import com.example.cstv.ui.screen.splash.SplashScreen
 import com.example.cstv.ui.theme.CSTVTheme
 import dagger.hilt.android.AndroidEntryPoint
 

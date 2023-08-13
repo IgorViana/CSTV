@@ -10,7 +10,7 @@ import com.example.cstv.ui.screen.splash.SplashScreen
 
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = NavigationScreens.SplashScreen.name) {
+    NavHost(navController = navController, startDestination = NavigationScreens.MainScreen.name) {
         composable(NavigationScreens.SplashScreen.name) {
             SplashScreen(navController)
         }

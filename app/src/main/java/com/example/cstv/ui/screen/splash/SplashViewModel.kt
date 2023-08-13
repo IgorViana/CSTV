@@ -1,5 +1,7 @@
 package com.example.cstv.ui.screen.splash
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +22,7 @@ class SplashViewModel @Inject constructor() : ViewModel() {
             delay(2000)
             _isLoading.value = false
         }
+        Log.i("TAG", "SPLASH")
     }
 
 }

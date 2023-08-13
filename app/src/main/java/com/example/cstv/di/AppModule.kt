@@ -1,22 +1,32 @@
 package com.example.cstv.di
 
+import com.example.cstv.networking.MatchService
+import com.example.cstv.repository.match.IMatchRepository
+import com.example.cstv.repository.match.MatchRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class AppModule {
 
     @Provides
-    @Singleton
+    fun provideMatchRepositoryInstance(network: MatchService): IMatchRepository =
+        MatchRepositoryImpl(network)
+
+    @Provides
+    fun provideMatchServiceInstance(retrofit: Retrofit): MatchService =
+        retrofit.create(MatchService::class.java)
+
+    @Provides
     fun provideRetrofitInstance(): Retrofit {
 
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -30,7 +40,7 @@ class AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("url")
+            .baseUrl("https://api.pandascore.co/csgo/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
@@ -39,4 +49,5 @@ class AppModule {
     companion object {
         private const val TIMEOUT = 20L
     }
+
 }
