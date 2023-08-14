@@ -1,6 +1,7 @@
 package com.example.cstv.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.cstv.R
 import com.example.cstv.model.League
 import com.example.cstv.model.Live
 import com.example.cstv.model.MatchResponseItem
@@ -30,23 +33,34 @@ import com.example.cstv.model.Serie
 import com.example.cstv.model.Tournament
 import com.example.cstv.model.Videogame
 import com.example.cstv.model.WinnerX
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 
 @Composable
-fun MatchItem(modifier: Modifier = Modifier, item: MatchResponseItem) {
+fun MatchItem(
+    modifier: Modifier = Modifier,
+    item: MatchResponseItem,
+    onMatchClick: (id: Long) -> Unit = {}
+) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFF272639),
         ),
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .padding(vertical = 12.dp, horizontal = 24.dp)
+            .fillMaxWidth()
+            .clickable { onMatchClick(item.id) },
         shape = RoundedCornerShape(16.dp)
     ) {
         Column {
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopEnd) {
                 Text(
-                    text = "AGORA",
+                    text = if (item.status == "running") "AGORA" else "Hoje, 21:00",
                     modifier = Modifier
                         .background(
-                            color = Color.Red,
+                            color = if (item.status == "running") Color(0xFFF42A35)
+                            else Color(0x33FAFAFA),
                             shape = RoundedCornerShape(bottomStart = 16.dp)
                         )
                         .padding(8.dp)
@@ -60,13 +74,21 @@ fun MatchItem(modifier: Modifier = Modifier, item: MatchResponseItem) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 // check if exists
-                if(item.opponents.size >=2){
-                    val opponent1 = item.opponents[0].opponent
-                    val opponent2 = item.opponents[1].opponent
-                    TeamComponent(model = opponent1)
-                    Text(text = "VS", modifier = Modifier.padding(start = 20.dp, end = 20.dp))
-                    TeamComponent(model = opponent2)
+                var opponent1: OpponentX? = null
+                var opponent2: OpponentX? = null
+                if (item.opponents.size >= 2) {
+                    opponent1 = item.opponents[0].opponent
+                    opponent2 = item.opponents[1].opponent
                 }
+                TeamComponent(model = opponent1, modifier = Modifier.weight(2f))
+                Text(
+                    text = "VS",
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp)
+                        .weight(1f)
+                )
+                TeamComponent(model = opponent2, modifier = Modifier.weight(2f))
+
             }
             Spacer(
                 modifier = Modifier
@@ -86,7 +108,8 @@ fun MatchItem(modifier: Modifier = Modifier, item: MatchResponseItem) {
                     modifier = Modifier
                         .padding(end = 8.dp)
                         .size(16.dp),
-                    // placeholder = painterResource(id = R.drawable.fuze_logo)
+                    placeholder = painterResource(id = R.drawable.placeholder_icon),
+                    error = painterResource(id = R.drawable.placeholder_icon)
                 )
                 Text(text = item.league.name + " " + item.serie.name)
             }
@@ -94,15 +117,49 @@ fun MatchItem(modifier: Modifier = Modifier, item: MatchResponseItem) {
     }
 }
 
+
+private fun FormatDate(date: String) {
+
+    val currentDate = Calendar.getInstance()
+
+    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm.SSSZ")
+    val formatted: Date = formatter.parse(date)
+    val calendar = Calendar.getInstance()
+    calendar.time = formatted
+
+    val today = SimpleDateFormat("HH:mm")
+    val week = SimpleDateFormat("EEEE,HH:mm")
+    val other = SimpleDateFormat("dd.mm HH:mm")
+
+    if (currentDate.time.day == calendar.time.day) {
+        val timeFormatted: String = "Hoje " + today.format(calendar.time)
+    }
+
+    val year1: Int = currentDate.get(currentDate.weekYear)
+    val week1: Int = currentDate.get(currentDate.weeksInWeekYear)
+    val year2: Int = calendar.get(calendar.weekYear)
+    val week2: Int = calendar.get(calendar.weeksInWeekYear)
+
+    if (year1 == year2 && week1 == week2) {
+        val timeFormatted: String = week.format(calendar.time)
+    } else {
+        val timeFormatted: String = other.format(calendar.time)
+    }
+
+    val now = "AGORA"
+}
+
 @Composable
-fun TeamComponent(modifier: Modifier = Modifier, model: OpponentX) {
+fun TeamComponent(modifier: Modifier = Modifier, model: OpponentX?) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         AsyncImage(
-            model = model.image_url,
+            model = model?.image_url,
             contentDescription = "Team flag",
-            modifier = Modifier.size(width = 53.dp, height = 60.dp)
+            modifier = Modifier.size(width = 53.dp, height = 60.dp),
+            placeholder = painterResource(id = R.drawable.placeholder_icon),
+            error = painterResource(id = R.drawable.placeholder_icon)
         )
-        Text(text = model.name, modifier = Modifier.padding(top = 10.dp))
+        Text(text = model?.name.orEmpty(), modifier = Modifier.padding(top = 10.dp))
     }
 }
 

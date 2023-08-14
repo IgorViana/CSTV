@@ -18,7 +18,7 @@ data class MatchResponseItem(
     @SerializedName("games")
     val games: List<Game>,
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
     @SerializedName("league")
     val league: League,
     @SerializedName("league_id")
