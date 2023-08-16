@@ -14,7 +14,7 @@ data class Game(
     val forfeit: Boolean,
     val id: Int,
     val length: @RawValue Any?,
-    val match_id: Int,
+    val match_id: Long,
     val position: Int,
     val status: String,
     val winner: Winner,

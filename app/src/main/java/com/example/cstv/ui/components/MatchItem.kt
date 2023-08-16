@@ -20,8 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
 import com.example.cstv.model.matches.League
@@ -41,16 +44,15 @@ import java.util.Date
 fun MatchItem(
     modifier: Modifier = Modifier,
     item: MatchResponseItem,
-    onMatchClick: (matchId: Long) -> Unit = {}
+    onMatchClick: (matchId: Long, title: String) -> Unit = { _, _ -> }
 ) {
+    val title = item.league.name + " + " + item.serie.name.orEmpty()
     Card(
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF272639),
-        ),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF272639)),
         modifier = modifier
             .padding(vertical = 12.dp, horizontal = 24.dp)
             .fillMaxWidth()
-            .clickable { onMatchClick(item.id) },
+            .clickable { onMatchClick(item.games[0].match_id, title) },
         shape = RoundedCornerShape(16.dp)
     ) {
         Column {
@@ -63,7 +65,12 @@ fun MatchItem(
                             else Color(0x33FAFAFA),
                             shape = RoundedCornerShape(bottomStart = 16.dp)
                         )
-                        .padding(8.dp)
+                        .padding(8.dp),
+                    style = TextStyle(
+                        fontSize = 8.sp,
+                        color = Color(0xFFFFFFFF),
+                        textAlign = TextAlign.Center,
+                    )
                 )
             }
             Row(
@@ -73,7 +80,7 @@ fun MatchItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                // check if exists
+                // TODO check if exists
                 var opponent1: OpponentX? = null
                 var opponent2: OpponentX? = null
                 if (item.opponents.size >= 2) {
@@ -85,7 +92,11 @@ fun MatchItem(
                     text = "VS",
                     modifier = Modifier
                         .padding(start = 20.dp, end = 20.dp)
-                        .weight(1f)
+                        .weight(1f),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color(0x80FFFFFF),
+                    )
                 )
                 TeamComponent(model = opponent2, modifier = Modifier.weight(2f))
 
@@ -111,7 +122,13 @@ fun MatchItem(
                     placeholder = painterResource(id = R.drawable.placeholder_icon),
                     error = painterResource(id = R.drawable.placeholder_icon)
                 )
-                Text(text = item.league.name + " " + item.serie.name)
+                Text(
+                    text = title,
+                    style = TextStyle(
+                        fontSize = 8.sp,
+                        color = Color(0xFFFFFFFF)
+                    )
+                )
             }
         }
     }
@@ -147,20 +164,6 @@ private fun FormatDate(date: String) {
     }
 
     val now = "AGORA"
-}
-
-@Composable
-fun TeamComponent(modifier: Modifier = Modifier, model: OpponentX?) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        AsyncImage(
-            model = model?.image_url,
-            contentDescription = "Team flag",
-            modifier = Modifier.size(width = 53.dp, height = 60.dp),
-            placeholder = painterResource(id = R.drawable.placeholder_icon),
-            error = painterResource(id = R.drawable.placeholder_icon)
-        )
-        Text(text = model?.name.orEmpty(), modifier = Modifier.padding(top = 10.dp))
-    }
 }
 
 @Preview(showBackground = true)

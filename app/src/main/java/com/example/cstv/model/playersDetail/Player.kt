@@ -3,10 +3,10 @@ package com.example.cstv.model.playersDetail
 data class Player(
     val age: Int,
     val birthday: String,
-    val first_name: String,
+    val first_name: String?,
     val id: Int,
     val image_url: String,
-    val last_name: String,
+    val last_name: String?,
     val modified_at: String,
     val name: String,
     val nationality: String,

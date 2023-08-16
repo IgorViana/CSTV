@@ -1,6 +1,5 @@
 package com.example.cstv.ui.screen.main
 
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,16 +18,19 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.cstv.ui.components.LoadingComponent
+import com.example.cstv.R
 import com.example.cstv.ui.components.MatchItem
 import com.example.cstv.ui.navigation.NavigationScreens
 import com.example.cstv.ui.theme.CSTVTheme
-import com.google.gson.Gson
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -45,7 +47,15 @@ fun MainScreen(navController: NavController) {
 
     Column(modifier = Modifier.background(color = Color(0xFF161621))) {
 
-        Text(text = "Partidas", modifier = Modifier.padding(24.dp))
+        Text(
+            text = stringResource(R.string.partidas),
+            modifier = Modifier.padding(24.dp),
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(
+                color = Color(0xFFFFFFFF),
+            )
+        )
 
         if (state.value.isLoading) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -55,8 +65,8 @@ fun MainScreen(navController: NavController) {
         state.value.matches?.let { matchesList ->
             LazyColumn(Modifier.pullRefresh(pullState)) {
                 items(matchesList) { match ->
-                    MatchItem(item = match, onMatchClick = { matchId ->
-                        navController.navigate(NavigationScreens.MatchDetailScreen.name + "/$matchId")
+                    MatchItem(item = match, onMatchClick = { matchId, title ->
+                        navController.navigate(NavigationScreens.MatchDetailScreen.name + "/$matchId/$title")
                     })
                 }
             }

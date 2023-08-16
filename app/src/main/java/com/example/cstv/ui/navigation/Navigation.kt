@@ -6,11 +6,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.cstv.model.matches.MatchResponseItem
 import com.example.cstv.ui.screen.main.MainScreen
 import com.example.cstv.ui.screen.matchDetail.MatchDetailScreen
 import com.example.cstv.ui.screen.splash.SplashScreen
-import com.example.cstv.util.MatchResponseItemParamType
 
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -24,14 +22,21 @@ fun Navigation(navController: NavHostController) {
         }
 
         composable(
-            route = NavigationScreens.MatchDetailScreen.name + "/{matchId}",
+            route = NavigationScreens.MatchDetailScreen.name + "/{matchId}/{title}",
             arguments = listOf(navArgument(name = "matchId") {
                 type = NavType.LongType
+                nullable = false
+            }, navArgument(name = "title") {
+                type = NavType.StringType
                 nullable = false
             }
             )
         ) { entry ->
-            MatchDetailScreen(navController, entry.arguments?.getLong("matchId") ?: 0L)
+            MatchDetailScreen(
+                navController,
+                entry.arguments?.getLong("matchId") ?: 0L,
+                entry.arguments?.getString("title").orEmpty()
+            )
         }
     }
 }

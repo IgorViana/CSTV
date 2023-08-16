@@ -1,5 +1,6 @@
 package com.example.cstv.ui.screen.matchDetail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,12 +15,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -31,22 +37,41 @@ import com.example.cstv.ui.theme.CSTVTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MatchDetailScreen(navController: NavController, matchId: Long) {
+fun MatchDetailScreen(navController: NavController, matchId: Long, title: String) {
 
     val viewModel: MatchDetailViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize()) {
-
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF161621))
+    ) {
         TopAppBar(
+            modifier = Modifier.fillMaxWidth(),
             title = {
-                Text(state.value.detailResponse?.matchDetailResponse?.league?.name + " + " + state.value.detailResponse?.matchDetailResponse?.serie?.name)
+                Text(
+                    text = title,
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        color = Color(0xFFFFFFFF),
+                        textAlign = TextAlign.Center,
+                    )
+                )
+
             },
             navigationIcon = {
                 IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(Icons.Filled.ArrowBack, null)
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back button",
+                        tint = Color.White
+                    )
                 }
-            })
+            }, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                containerColor = Color(0xFF161621)
+            )
+        )
 
         if (state.value.isLoading) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -74,13 +99,23 @@ fun MatchDetailScreen(navController: NavController, matchId: Long) {
                     text = "VS",
                     modifier = Modifier
                         .padding(start = 20.dp, end = 20.dp)
-                        .weight(1f)
+                        .weight(1f),
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color(0x80FFFFFF),
+                    )
                 )
                 TeamComponent(model = team2, modifier = Modifier.weight(2f))
             }
 
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Text(text = "Hoje, 21:00")
+                Text(
+                    text = "Hoje, 21:00",
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color(0xFFFFFFFF)
+                    )
+                )
             }
 
             val opponents1 = detailResponse.playerDetailResponse.opponents?.get(0)
@@ -111,6 +146,6 @@ fun MatchDetailScreen(navController: NavController, matchId: Long) {
 @Composable
 fun MatchDetailScreenPreview() {
     CSTVTheme {
-        MatchDetailScreen(rememberNavController(), 1)
+        MatchDetailScreen(rememberNavController(), 1, "Title")
     }
 }

@@ -11,7 +11,7 @@ data class Serie(
     val id: Int,
     val league_id: Int,
     val modified_at: String,
-    val name: String,
+    val name: String?,
     val season: String,
     val slug: String,
     val winner_id: Int,
