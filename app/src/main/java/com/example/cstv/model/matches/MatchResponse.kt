@@ -1,3 +1,7 @@
 package com.example.cstv.model.matches
 
-class MatchResponse : ArrayList<MatchResponseItem>()
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+class MatchResponse : ArrayList<MatchResponseItem>(), Parcelable

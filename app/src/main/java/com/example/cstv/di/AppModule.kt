@@ -3,9 +3,9 @@ package com.example.cstv.di
 import com.example.cstv.networking.MatchService
 import com.example.cstv.networking.PlayerService
 import com.example.cstv.repository.match.IMatchRepository
-import com.example.cstv.repository.match.IPlayerRepository
+import com.example.cstv.repository.match.IMatchDetailRepository
 import com.example.cstv.repository.match.MatchRepositoryImpl
-import com.example.cstv.repository.match.PlayerRepositoryImpl
+import com.example.cstv.repository.match.MatchDetailRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,11 +23,11 @@ class AppModule {
 
     @Provides
     fun provideMatchRepositoryInstance(network: MatchService): IMatchRepository =
-        MatchRepositoryImpl(network)
+        MatchRepositoryImpl(networking = network)
 
     @Provides
-    fun providePlayerRepositoryInstance(network: PlayerService): IPlayerRepository =
-        PlayerRepositoryImpl(network)
+    fun providePlayerRepositoryInstance(network: PlayerService, matchNetwork: MatchService): IMatchDetailRepository =
+        MatchDetailRepositoryImpl(networking = network, matchNetworking = matchNetwork)
 
     @Provides
     fun provideMatchServiceInstance(retrofit: Retrofit): MatchService =
@@ -52,7 +52,7 @@ class AppModule {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://api.pandascore.co/csgo/")
+            .baseUrl("https://api.pandascore.co/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

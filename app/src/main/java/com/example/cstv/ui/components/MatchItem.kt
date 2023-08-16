@@ -41,7 +41,7 @@ import java.util.Date
 fun MatchItem(
     modifier: Modifier = Modifier,
     item: MatchResponseItem,
-    onMatchClick: (id: Long) -> Unit = {}
+    onMatchClick: (matchId: Long) -> Unit = {}
 ) {
     Card(
         colors = CardDefaults.cardColors(
@@ -173,7 +173,7 @@ fun MatchItemPreview() {
             draw = false,
             endAt = "fabulas",
             forfeit = false,
-            gameAdvantage = "",
+            gameAdvantage = 1,
             games = listOf(),
             id = 2046,
             league = League(

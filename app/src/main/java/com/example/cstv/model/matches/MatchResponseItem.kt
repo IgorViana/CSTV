@@ -1,7 +1,11 @@
 package com.example.cstv.model.matches
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
+@Parcelize
 data class MatchResponseItem(
     @SerializedName("begin_at")
     val beginAt: String,
@@ -14,7 +18,7 @@ data class MatchResponseItem(
     @SerializedName("forfeit")
     val forfeit: Boolean,
     @SerializedName("game_advantage")
-    val gameAdvantage: Any,
+    val gameAdvantage: Int?,
     @SerializedName("games")
     val games: List<Game>,
     @SerializedName("id")
@@ -60,11 +64,11 @@ data class MatchResponseItem(
     @SerializedName("videogame")
     val videogame: Videogame,
     @SerializedName("videogame_version")
-    val videogameVersion: Any,
+    val videogameVersion: @RawValue Any?,
     @SerializedName("winner")
     val winner: WinnerX,
     @SerializedName("winner_id")
     val winnerId: Int,
     @SerializedName("winner_type")
     val winnerType: String
-)
+):Parcelable

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -23,6 +24,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cstv.R
 import com.example.cstv.ui.navigation.NavigationScreens
 import com.example.cstv.ui.theme.CSTVTheme
+import kotlinx.coroutines.delay
 
 
 @Composable
@@ -30,13 +32,18 @@ fun SplashScreen(navController: NavController) {
 
     val viewModel: SplashViewModel = hiltViewModel()
 
-    val isLoading = viewModel.isLoading.collectAsState()
+    /*val isLoading = viewModel.isLoading.collectAsState()
 
     if (!isLoading.value) {
         navController.navigate(NavigationScreens.MainScreen.name)
-    }
+    }*/
+    LaunchedEffect(key1 = null , block = {
+        delay(2000)
+        navController.navigate(NavigationScreens.MainScreen.name)
+    })
 
     Box(
+
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Blue),

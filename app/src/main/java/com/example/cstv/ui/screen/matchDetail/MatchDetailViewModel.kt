@@ -3,8 +3,8 @@ package com.example.cstv.ui.screen.matchDetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cstv.model.playersDetail.PlayerDetailResponse
-import com.example.cstv.repository.match.IPlayerRepository
+import com.example.cstv.model.DetailResponse
+import com.example.cstv.repository.match.IMatchDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MatchDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val repository: IPlayerRepository
+    private val repository: IMatchDetailRepository
 ) : ViewModel() {
 
     private val id: Long = 825983 //savedStateHandle["matchId"] ?: 0L
@@ -33,7 +33,7 @@ class MatchDetailViewModel @Inject constructor(
                 result.onLoading { isLoading ->
                     _state.value = _state.value.copy(isLoading = isLoading)
                 }.onSuccess { data ->
-                    _state.value = _state.value.copy(matches = data)
+                    _state.value = _state.value.copy(detailResponse = data)
                 }.onFailure { error ->
                     _state.value = _state.value.copy(error = error)
                 }
@@ -44,6 +44,6 @@ class MatchDetailViewModel @Inject constructor(
 
 data class DetailState(
     val isLoading: Boolean = false,
-    val matches: PlayerDetailResponse? = null,
+    val detailResponse: DetailResponse? = null,
     val error: String? = null
 )

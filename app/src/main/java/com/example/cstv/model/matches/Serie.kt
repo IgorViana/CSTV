@@ -1,5 +1,9 @@
 package com.example.cstv.model.matches
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Serie(
     val begin_at: String,
     val end_at: String,
@@ -13,4 +17,4 @@ data class Serie(
     val winner_id: Int,
     val winner_type: String,
     val year: Int
-)
+) : Parcelable

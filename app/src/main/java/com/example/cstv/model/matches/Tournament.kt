@@ -1,5 +1,9 @@
 package com.example.cstv.model.matches
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Tournament(
     val begin_at: String,
     val detailed_stats: Boolean,
@@ -16,4 +20,4 @@ data class Tournament(
     val tier: String,
     val winner_id: Int,
     val winner_type: String
-)
+) : Parcelable

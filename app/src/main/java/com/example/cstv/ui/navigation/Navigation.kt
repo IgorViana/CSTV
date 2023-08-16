@@ -6,13 +6,15 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.cstv.model.matches.MatchResponseItem
 import com.example.cstv.ui.screen.main.MainScreen
 import com.example.cstv.ui.screen.matchDetail.MatchDetailScreen
 import com.example.cstv.ui.screen.splash.SplashScreen
+import com.example.cstv.util.MatchResponseItemParamType
 
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = NavigationScreens.MainScreen.name) {
+    NavHost(navController = navController, startDestination = NavigationScreens.SplashScreen.name) {
         composable(NavigationScreens.SplashScreen.name) {
             SplashScreen(navController)
         }

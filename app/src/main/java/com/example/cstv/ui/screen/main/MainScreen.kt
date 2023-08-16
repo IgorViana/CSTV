@@ -1,5 +1,6 @@
 package com.example.cstv.ui.screen.main
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,9 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.cstv.ui.components.LoadingComponent
 import com.example.cstv.ui.components.MatchItem
 import com.example.cstv.ui.navigation.NavigationScreens
 import com.example.cstv.ui.theme.CSTVTheme
+import com.google.gson.Gson
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

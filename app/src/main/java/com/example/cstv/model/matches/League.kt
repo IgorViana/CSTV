@@ -1,5 +1,9 @@
 package com.example.cstv.model.matches
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class League(
     val id: Int,
     val image_url: String,
@@ -7,4 +11,4 @@ data class League(
     val name: String,
     val slug: String,
     val url: String
-)
+):Parcelable
