@@ -1,4 +1,4 @@
-package com.example.cstv.model
+package com.example.cstv.model.matches
 
 data class Serie(
     val begin_at: String,

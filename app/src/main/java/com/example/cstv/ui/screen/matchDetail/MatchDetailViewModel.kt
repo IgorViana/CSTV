@@ -1,9 +1,10 @@
-package com.example.cstv.ui.screen.main
+package com.example.cstv.ui.screen.matchDetail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cstv.model.matches.MatchResponse
-import com.example.cstv.repository.match.IMatchRepository
+import com.example.cstv.model.playersDetail.PlayerDetailResponse
+import com.example.cstv.repository.match.IPlayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,18 +13,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: IMatchRepository) : ViewModel() {
+class MatchDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val repository: IPlayerRepository
+) : ViewModel() {
 
-    private val _state: MutableStateFlow<MainState> = MutableStateFlow(MainState())
+    private val id: Long = 825983 //savedStateHandle["matchId"] ?: 0L
+
+    private val _state: MutableStateFlow<DetailState> = MutableStateFlow(DetailState())
     val state = _state.asStateFlow()
 
     init {
-        getMatches()
+        getPlayersStatsByMatchId(id)
     }
 
-    fun getMatches() {
+    private fun getPlayersStatsByMatchId(matchId: Long) {
         viewModelScope.launch {
-            repository.getMatches().stateIn(viewModelScope).collect { result ->
+            repository.getPlayersStatsByMatch(matchId).stateIn(viewModelScope).collect { result ->
                 result.onLoading { isLoading ->
                     _state.value = _state.value.copy(isLoading = isLoading)
                 }.onSuccess { data ->
@@ -36,8 +42,8 @@ class MainViewModel @Inject constructor(private val repository: IMatchRepository
     }
 }
 
-data class MainState(
+data class DetailState(
     val isLoading: Boolean = false,
-    val matches: MatchResponse? = null,
+    val matches: PlayerDetailResponse? = null,
     val error: String? = null
 )

@@ -1,4 +1,4 @@
-package com.example.cstv.model
+package com.example.cstv.model.matchesDetail
 
 data class League(
     val id: Int,
@@ -6,5 +6,5 @@ data class League(
     val modified_at: String,
     val name: String,
     val slug: String,
-    val url: String
+    val url: Any
 )

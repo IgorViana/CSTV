@@ -1,4 +1,4 @@
-package com.example.cstv.model
+package com.example.cstv.model.matches
 
 import com.google.gson.annotations.SerializedName
 

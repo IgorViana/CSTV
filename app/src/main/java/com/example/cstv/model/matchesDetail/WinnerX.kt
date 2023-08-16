@@ -1,7 +1,7 @@
-package com.example.cstv.model
+package com.example.cstv.model.matchesDetail
 
 data class WinnerX(
-    val acronym: Any,
+    val acronym: String,
     val id: Int,
     val image_url: String,
     val location: String,

@@ -1,9 +1,11 @@
 package com.example.cstv.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.cstv.ui.screen.main.MainScreen
 import com.example.cstv.ui.screen.matchDetail.MatchDetailScreen
 import com.example.cstv.ui.screen.splash.SplashScreen
@@ -19,8 +21,15 @@ fun Navigation(navController: NavHostController) {
             MainScreen(navController)
         }
 
-        composable(NavigationScreens.MatchDetailScreen.name) {
-            MatchDetailScreen(navController)
+        composable(
+            route = NavigationScreens.MatchDetailScreen.name + "/{matchId}",
+            arguments = listOf(navArgument(name = "matchId") {
+                type = NavType.LongType
+                nullable = false
+            }
+            )
+        ) { entry ->
+            MatchDetailScreen(navController, entry.arguments?.getLong("matchId") ?: 0L)
         }
     }
 }

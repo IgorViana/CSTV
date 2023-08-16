@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.example.cstv"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.cstv"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -70,8 +70,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    //Swipe Refresh
-    implementation("androidx.compose.material3.pullrefresh:1.0.0")
+    implementation("androidx.compose.material:material:1.6.0-alpha03")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

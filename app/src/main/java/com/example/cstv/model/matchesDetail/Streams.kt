@@ -1,4 +1,4 @@
-package com.example.cstv.model
+package com.example.cstv.model.matchesDetail
 
 data class Streams(
     val embed_url: String,

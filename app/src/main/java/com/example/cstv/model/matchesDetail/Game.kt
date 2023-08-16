@@ -1,4 +1,4 @@
-package com.example.cstv.model
+package com.example.cstv.model.matchesDetail
 
 data class Game(
     val begin_at: String,
@@ -8,7 +8,7 @@ data class Game(
     val finished: Boolean,
     val forfeit: Boolean,
     val id: Int,
-    val length: Any,
+    val length: Int,
     val match_id: Int,
     val position: Int,
     val status: String,
