@@ -5,9 +5,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -46,6 +50,7 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF161621))
+            .verticalScroll(rememberScrollState())
     ) {
         TopAppBar(
             modifier = Modifier.fillMaxWidth(),
@@ -80,8 +85,8 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
         }
 
         state.value.detailResponse?.let { detailResponse ->
-            val team1 = detailResponse.matchDetailResponse.opponents?.get(0)?.opponent
-            val team2 = detailResponse.matchDetailResponse.opponents?.get(1)?.opponent
+            val team1 = detailResponse.matchDetailResponse.opponents?.getOrNull(0)?.opponent
+            val team2 = detailResponse.matchDetailResponse.opponents?.getOrNull(1)?.opponent
 
             Row(
                 modifier = Modifier
@@ -118,8 +123,8 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
                 )
             }
 
-            val opponents1 = detailResponse.playerDetailResponse.opponents?.get(0)
-            val opponents2 = detailResponse.playerDetailResponse.opponents?.get(1)
+            val opponents1 = detailResponse.playerDetailResponse.opponents.getOrNull(0)
+            val opponents2 = detailResponse.playerDetailResponse.opponents.getOrNull(1)
 
             if (opponents1 != null && opponents2 != null) {
                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -127,8 +132,9 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
                         opponents1.players.forEach { player ->
                             LeftSidePlayerComponent(player = player)
                         }
-
                     }
+
+                    Spacer(modifier = Modifier.width(12.dp))
 
                     Column(modifier = Modifier.weight(1f)) {
                         opponents2.players.forEach { player ->

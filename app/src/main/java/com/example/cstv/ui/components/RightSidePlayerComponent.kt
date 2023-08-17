@@ -34,33 +34,40 @@ fun RightSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
                 shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)
             )
     ) {
+        // TODO Make it rounded
         AsyncImage(
             model = player.image_url,
             contentDescription = "Players image",
             modifier = Modifier
-                .size(50.dp),
+                .size(50.dp)
+                .align(Alignment.CenterVertically),
             placeholder = painterResource(id = R.drawable.rectangle_placeholder),
             error = painterResource(id = R.drawable.rectangle_placeholder),
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.Crop
         )
 
         Column(
             modifier = Modifier
                 .weight(1f)
                 .padding(start = 16.dp, bottom = 8.dp, top = 8.dp),
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = player.slug, style = TextStyle(
+                text = player.slug,
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = TextStyle(
                     fontSize = 14.sp,
                     color = Color(0xFFFFFFFF)
-                )
+                ),
+                maxLines = 1
             )
             Text(
                 text = player.first_name.orEmpty() + player.last_name.orEmpty(), style = TextStyle(
                     fontSize = 12.sp,
                     color = Color(0xFF6C6B7E)
-                )
+                ),
+                maxLines = 1
             )
         }
     }

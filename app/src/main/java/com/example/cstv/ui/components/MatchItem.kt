@@ -80,13 +80,10 @@ fun MatchItem(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                // TODO check if exists
-                var opponent1: OpponentX? = null
-                var opponent2: OpponentX? = null
-                if (item.opponents.size >= 2) {
-                    opponent1 = item.opponents[0].opponent
-                    opponent2 = item.opponents[1].opponent
-                }
+
+                val opponent1: OpponentX? = item.opponents?.getOrNull(0)?.opponent
+                val opponent2: OpponentX? = item.opponents?.getOrNull(1)?.opponent
+
                 TeamComponent(model = opponent1, modifier = Modifier.weight(2f))
                 Text(
                     text = "VS",

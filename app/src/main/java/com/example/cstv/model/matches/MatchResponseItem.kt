@@ -38,7 +38,7 @@ data class MatchResponseItem(
     @SerializedName("number_of_games")
     val numberOfGames: Int,
     @SerializedName("opponents")
-    val opponents: List<Opponent>,
+    val opponents: List<Opponent>?,
     @SerializedName("original_scheduled_at")
     val originalScheduledAt: String,
     @SerializedName("rescheduled")

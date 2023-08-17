@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -49,7 +50,9 @@ fun MainScreen(navController: NavController) {
 
         Text(
             text = stringResource(R.string.partidas),
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier
+                .padding(24.dp)
+                .fillMaxWidth(),
             fontSize = 32.sp,
             fontWeight = FontWeight.Bold,
             style = TextStyle(

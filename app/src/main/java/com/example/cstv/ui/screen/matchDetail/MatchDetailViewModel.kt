@@ -18,7 +18,7 @@ class MatchDetailViewModel @Inject constructor(
     private val repository: IMatchDetailRepository
 ) : ViewModel() {
 
-    private val id: Long = 825983 //savedStateHandle["matchId"] ?: 0L
+    private val id: Long = savedStateHandle.get<Long>("matchId") ?: 0L
 
     private val _state: MutableStateFlow<DetailState> = MutableStateFlow(DetailState())
     val state = _state.asStateFlow()

@@ -38,21 +38,24 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
             modifier = Modifier
                 .weight(1f)
                 .padding(end = 16.dp, bottom = 8.dp, top = 8.dp),
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = player.slug, modifier = Modifier.padding(bottom = 8.dp),
+                text = player.name, modifier = Modifier.padding(bottom = 8.dp),
                 style = TextStyle(
                     fontSize = 14.sp,
                     color = Color(0xFFFFFFFF)
-                )
+                ),
+                maxLines = 1
             )
             Text(
-                text = player.first_name + player.last_name,
+                text = "${player.first_name} ${player.last_name}",
                 style = TextStyle(
                     fontSize = 12.sp,
                     color = Color(0xFF6C6B7E)
-                )
+                ),
+                maxLines = 1
             )
         }
         AsyncImage(
@@ -63,10 +66,11 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
                 .align(Alignment.CenterVertically),
             placeholder = painterResource(id = R.drawable.rectangle_placeholder),
             error = painterResource(id = R.drawable.rectangle_placeholder),
-            contentScale = ContentScale.Fit
+            contentScale = ContentScale.Crop
         )
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun LeftSidePlayerComponentPreview() {
