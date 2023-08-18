@@ -36,9 +36,7 @@ import com.example.cstv.model.matches.Serie
 import com.example.cstv.model.matches.Tournament
 import com.example.cstv.model.matches.Videogame
 import com.example.cstv.model.matches.WinnerX
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
+import com.example.cstv.util.formatDate
 
 @Composable
 fun MatchItem(
@@ -58,7 +56,7 @@ fun MatchItem(
         Column {
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopEnd) {
                 Text(
-                    text = if (item.status == "running") "AGORA" else "Hoje, 21:00",
+                    text = if (item.status == "running") "AGORA" else formatDate(item.beginAt),
                     modifier = Modifier
                         .background(
                             color = if (item.status == "running") Color(0xFFF42A35)
@@ -129,38 +127,6 @@ fun MatchItem(
             }
         }
     }
-}
-
-
-private fun FormatDate(date: String) {
-
-    val currentDate = Calendar.getInstance()
-
-    val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm.SSSZ")
-    val formatted: Date = formatter.parse(date)
-    val calendar = Calendar.getInstance()
-    calendar.time = formatted
-
-    val today = SimpleDateFormat("HH:mm")
-    val week = SimpleDateFormat("EEEE,HH:mm")
-    val other = SimpleDateFormat("dd.mm HH:mm")
-
-    if (currentDate.time.day == calendar.time.day) {
-        val timeFormatted: String = "Hoje " + today.format(calendar.time)
-    }
-
-    val year1: Int = currentDate.get(currentDate.weekYear)
-    val week1: Int = currentDate.get(currentDate.weeksInWeekYear)
-    val year2: Int = calendar.get(calendar.weekYear)
-    val week2: Int = calendar.get(calendar.weeksInWeekYear)
-
-    if (year1 == year2 && week1 == week2) {
-        val timeFormatted: String = week.format(calendar.time)
-    } else {
-        val timeFormatted: String = other.format(calendar.time)
-    }
-
-    val now = "AGORA"
 }
 
 @Preview(showBackground = true)

@@ -1,6 +1,7 @@
 package com.example.cstv.ui.screen.main
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,9 +11,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -29,6 +31,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.cstv.R
+import com.example.cstv.ui.components.LoadingComponent
 import com.example.cstv.ui.components.MatchItem
 import com.example.cstv.ui.navigation.NavigationScreens
 import com.example.cstv.ui.theme.CSTVTheme
@@ -62,15 +65,40 @@ fun MainScreen(navController: NavController) {
 
         if (state.value.isLoading) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator(modifier = Modifier.size(100.dp))
+                LoadingComponent(modifier = Modifier.size(100.dp))
             }
         }
         state.value.matches?.let { matchesList ->
-            LazyColumn(Modifier.pullRefresh(pullState)) {
-                items(matchesList) { match ->
-                    MatchItem(item = match, onMatchClick = { matchId, title ->
-                        navController.navigate(NavigationScreens.MatchDetailScreen.name + "/$matchId/$title")
-                    })
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .pullRefresh(pullState)
+            ) {
+                LazyColumn {
+                    items(matchesList) { match ->
+                        MatchItem(item = match, onMatchClick = { matchId, title ->
+                            navController.navigate(NavigationScreens.MatchDetailScreen.name + "/$matchId/$title")
+                        })
+                    }
+                }
+
+                PullRefreshIndicator(
+                    refreshing = false,
+                    state = pullState,
+                    modifier = Modifier.align(Alignment.TopCenter)
+                )
+            }
+        }
+
+        if (state.value.error != null) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "Erro ao carregar dados")
+                Button(onClick = { viewModel.getMatches() }) {
+                    Text(text = "Tente novamente")
                 }
             }
         }

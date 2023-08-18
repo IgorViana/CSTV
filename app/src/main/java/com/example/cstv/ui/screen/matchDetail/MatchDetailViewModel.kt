@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cstv.model.DetailResponse
-import com.example.cstv.repository.match.IMatchDetailRepository
+import com.example.cstv.repository.IMatchDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -27,7 +27,7 @@ class MatchDetailViewModel @Inject constructor(
         getPlayersStatsByMatchId(id)
     }
 
-    private fun getPlayersStatsByMatchId(matchId: Long) {
+    fun getPlayersStatsByMatchId(matchId: Long) {
         viewModelScope.launch {
             repository.getPlayersStatsByMatch(matchId).stateIn(viewModelScope).collect { result ->
                 result.onLoading { isLoading ->

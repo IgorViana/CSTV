@@ -1,4 +1,4 @@
-package com.example.cstv.repository.match
+package com.example.cstv.repository
 
 import com.example.cstv.model.matches.MatchResponse
 import com.example.cstv.model.matches.MatchResponseItem

@@ -2,10 +2,10 @@ package com.example.cstv.di
 
 import com.example.cstv.networking.MatchService
 import com.example.cstv.networking.PlayerService
-import com.example.cstv.repository.match.IMatchRepository
-import com.example.cstv.repository.match.IMatchDetailRepository
-import com.example.cstv.repository.match.MatchRepositoryImpl
-import com.example.cstv.repository.match.MatchDetailRepositoryImpl
+import com.example.cstv.repository.IMatchRepository
+import com.example.cstv.repository.IMatchDetailRepository
+import com.example.cstv.repository.MatchRepositoryImpl
+import com.example.cstv.repository.MatchDetailRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
