@@ -68,7 +68,7 @@ fun MainScreen(navController: NavController) {
                 LoadingComponent(modifier = Modifier.size(100.dp))
             }
         }
-        state.value.matches?.let { matchesList ->
+        state.value.data?.matches?.let { matchesList ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()

@@ -2,6 +2,7 @@ package com.example.cstv.ui.screen.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cstv.model.match.MatchListModel
 import com.example.cstv.networking.response.match.MatchResponse
 import com.example.cstv.repository.IMatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +28,7 @@ class MainViewModel @Inject constructor(private val repository: IMatchRepository
                 result.onLoading { isLoading ->
                     _state.value = _state.value.copy(isLoading = isLoading)
                 }.onSuccess { data ->
-                    _state.value = _state.value.copy(matches = data)
+                    _state.value = _state.value.copy(data = data)
                 }.onFailure { error ->
                     _state.value = _state.value.copy(error = error)
                 }
@@ -38,6 +39,6 @@ class MainViewModel @Inject constructor(private val repository: IMatchRepository
 
 data class MainState(
     val isLoading: Boolean = false,
-    val matches: MatchResponse? = null,
+    val data: MatchListModel? = null,
     val error: String? = null
 )

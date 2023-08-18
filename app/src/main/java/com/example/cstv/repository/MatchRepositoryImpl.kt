@@ -1,8 +1,9 @@
 package com.example.cstv.repository
 
-import com.example.cstv.networking.response.match.MatchResponse
-import com.example.cstv.networking.response.match.MatchResponseItem
+import com.example.cstv.model.match.MatchListModel
 import com.example.cstv.networking.MatchService
+import com.example.cstv.networking.response.match.MatchResponseItem
+import com.example.cstv.util.Mapper
 import com.example.cstv.util.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -10,11 +11,12 @@ import kotlinx.coroutines.flow.flow
 
 class MatchRepositoryImpl(private val networking: MatchService) : IMatchRepository {
 
-    override fun getMatches(): Flow<Result<MatchResponse>> = flow {
+    override fun getMatches(): Flow<Result<MatchListModel>> = flow {
         emit(Result.Loading(true))
         try {
             val result = networking.getMatchesList()
-            emit(Result.Success(result))
+            val model = Mapper().mapMatchResponseToModel(result)
+            emit(Result.Success(model))
         } catch (exception: Exception) {
             emit(Result.Error(exception.message.toString()))
         } finally {

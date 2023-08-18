@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">CSTV</string>
     <string name="partidas">Partidas</string>
+    <string name="agora">AGORA</string>
+    <string name="running">running</string>
 </resources>

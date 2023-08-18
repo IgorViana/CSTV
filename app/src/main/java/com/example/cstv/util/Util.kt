@@ -6,14 +6,14 @@ import java.util.Locale
 import java.util.TimeZone
 
 
-fun formatDate(date: String): String {
+fun formatDate(date: String?): String {
     try {
         val todayDate = Calendar.getInstance()
 
         val givenDate = Calendar.getInstance()
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
         sdf.timeZone = TimeZone.getDefault()
-        givenDate.time = sdf.parse(date)!!
+        givenDate.time = sdf.parse(date)
 
         val dateFormatted = StringBuilder()
 

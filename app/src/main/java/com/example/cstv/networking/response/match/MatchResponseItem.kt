@@ -8,7 +8,7 @@ import kotlinx.parcelize.RawValue
 @Parcelize
 data class MatchResponseItem(
     @SerializedName("begin_at")
-    val beginAt: String,
+    val beginAt: String?,
     @SerializedName("detailed_stats")
     val detailedStats: Boolean,
     @SerializedName("draw")
