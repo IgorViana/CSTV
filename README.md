@@ -5,11 +5,16 @@ CSTV is an Android app that provides a list of CS:GO matches taking place across
 ## Features
 
 - **Splash Screen**: Initial Splash screen.
+  ![Splash](https://github.com/IgorViana/CSTV/assets/38112268/4a60133a-59b5-4fbc-9315-b458cd2cca72)
+
 
 - **List of Matches**: Screen with a list o matches.
+  ![Main](https://github.com/IgorViana/CSTV/assets/38112268/92b563bd-4c41-41b7-b881-e32747d233f1)
+
 
 - **Match Detail**: Screen of match details of a selected game.
-  
+  ![Detail](https://github.com/IgorViana/CSTV/assets/38112268/1c8f10ac-d386-493c-9ae1-ae20318f40a2)
+
 ## Installation
 
 1. Clone this repository to your local machine using `git clone https://github.com/IgorViana/CSTV.git`
