@@ -1,4 +1,4 @@
-# CSTV - CS:GO Tournament Viewer (Android App)
+# CSTV - CS:GO Matchs (Android App)
 
 CSTV is an Android app that provides a list of CS:GO matches taking place across various worldwide tournaments. Built using the MVVM (Model-View-ViewModel) architecture, CSTV offers a user-friendly interface for staying connected with the exciting world of CS:GO esports.
 
