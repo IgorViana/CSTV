@@ -14,7 +14,8 @@ CSTV is an Android app that provides a list of CS:GO matches taking place across
 
 1. Clone this repository to your local machine using `git clone https://github.com/IgorViana/CSTV.git`
 2. Open the project in Android Studio.
-3. Build and run the app on an Android emulator or physical device.
+3. You may need to add a PandaScore apikey to your local.properties, like this: API_KEY = KEY, or add manually in your project to test
+4. Build and run the app on an Android emulator or physical device.
 
 ## Technologies Used
 
