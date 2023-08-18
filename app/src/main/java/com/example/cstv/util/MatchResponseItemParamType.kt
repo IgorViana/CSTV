@@ -2,7 +2,7 @@ package com.example.cstv.util
 
 import android.os.Bundle
 import androidx.navigation.NavType
-import com.example.cstv.model.matches.MatchResponseItem
+import com.example.cstv.networking.response.match.MatchResponseItem
 import com.google.gson.Gson
 
 class MatchResponseItemParamType : NavType<MatchResponseItem>(isNullableAllowed = false) {

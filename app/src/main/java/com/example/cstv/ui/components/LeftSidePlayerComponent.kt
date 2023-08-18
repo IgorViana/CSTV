@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
-import com.example.cstv.model.playersDetail.Player
+import com.example.cstv.networking.response.player.Player
 
 @Composable
 fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
@@ -50,7 +50,7 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
                 maxLines = 1
             )
             Text(
-                text = "${player.first_name} ${player.last_name}",
+                text = "${player.firstName} ${player.lastName}",
                 style = TextStyle(
                     fontSize = 12.sp,
                     color = Color(0xFF6C6B7E)
@@ -59,7 +59,7 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
             )
         }
         AsyncImage(
-            model = player.image_url,
+            model = player.imageUrl,
             contentDescription = "Player's image",
             modifier = Modifier
                 .size(50.dp)
@@ -78,11 +78,11 @@ fun LeftSidePlayerComponentPreview() {
         player = Player(
             age = 0,
             birthday = "",
-            first_name = null,
+            firstName = null,
             id = 0,
-            image_url = "",
-            last_name = null,
-            modified_at = "",
+            imageUrl = "",
+            lastName = null,
+            modifiedAt = "",
             name = "",
             nationality = "",
             role = "",

@@ -1,6 +1,6 @@
 package com.example.cstv.repository
 
-import com.example.cstv.model.DetailResponse
+import com.example.cstv.networking.response.detail.DetailResponse
 import com.example.cstv.networking.MatchService
 import com.example.cstv.networking.PlayerService
 import com.example.cstv.util.Result

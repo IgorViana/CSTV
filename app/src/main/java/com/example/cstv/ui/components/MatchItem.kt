@@ -27,15 +27,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
-import com.example.cstv.model.matches.League
-import com.example.cstv.model.matches.Live
-import com.example.cstv.model.matches.MatchResponseItem
-import com.example.cstv.model.matches.Opponent
-import com.example.cstv.model.matches.OpponentX
-import com.example.cstv.model.matches.Serie
-import com.example.cstv.model.matches.Tournament
-import com.example.cstv.model.matches.Videogame
-import com.example.cstv.model.matches.WinnerX
+import com.example.cstv.networking.response.match.League
+import com.example.cstv.networking.response.match.Live
+import com.example.cstv.networking.response.match.MatchResponseItem
+import com.example.cstv.networking.response.match.Opponent
+import com.example.cstv.networking.response.match.OpponentX
+import com.example.cstv.networking.response.match.Serie
+import com.example.cstv.networking.response.match.Tournament
+import com.example.cstv.networking.response.match.Videogame
+import com.example.cstv.networking.response.match.WinnerX
 import com.example.cstv.util.formatDate
 
 @Composable
@@ -50,7 +50,7 @@ fun MatchItem(
         modifier = modifier
             .padding(vertical = 12.dp, horizontal = 24.dp)
             .fillMaxWidth()
-            .clickable { onMatchClick(item.games[0].match_id, title) },
+            .clickable { onMatchClick(item.games[0].matchId, title) },
         shape = RoundedCornerShape(16.dp)
     ) {
         Column {
@@ -109,7 +109,7 @@ fun MatchItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AsyncImage(
-                    model = item.league.image_url,
+                    model = item.league.imageUrl,
                     contentDescription = "League's image",
                     modifier = Modifier
                         .padding(end = 8.dp)
@@ -144,14 +144,14 @@ fun MatchItemPreview() {
             id = 2046,
             league = League(
                 id = 7798,
-                image_url = "https://duckduckgo.com/?q=ludus",
-                modified_at = "postea",
+                imageUrl = "https://duckduckgo.com/?q=ludus",
+                modifiedAt = "postea",
                 name = "Josue Sellers",
                 slug = "aeque",
                 url = "http://www.bing.com/search?q=rutrum"
             ),
             leagueId = 7480,
-            live = Live(opens_at = "", supported = false, url = ""),
+            live = Live(opensAt = "", supported = false, url = ""),
             matchType = "an",
             modifiedAt = "hac",
             name = "Isabelle Horton",
@@ -161,9 +161,9 @@ fun MatchItemPreview() {
                     opponent = OpponentX(
                         acronym = "",
                         id = 5152,
-                        image_url = "https://duckduckgo.com/?q=verear",
+                        imageUrl = "https://duckduckgo.com/?q=verear",
                         location = "turpis",
-                        modified_at = "sadipscing",
+                        modifiedAt = "sadipscing",
                         name = "Kirby Espinoza",
                         slug = "animal"
                     ),
@@ -173,9 +173,9 @@ fun MatchItemPreview() {
                     opponent = OpponentX(
                         acronym = "",
                         id = 5152,
-                        image_url = "https://duckduckgo.com/?q=verear",
+                        imageUrl = "https://duckduckgo.com/?q=verear",
                         location = "turpis",
-                        modified_at = "sadipscing",
+                        modifiedAt = "sadipscing",
                         name = "Kirby Espinoza",
                         slug = "animal"
                     ),
@@ -188,17 +188,17 @@ fun MatchItemPreview() {
             results = listOf(),
             scheduledAt = "sonet",
             serie = Serie(
-                begin_at = "elaboraret",
-                end_at = "adversarium",
-                full_name = "Evangelina Puckett",
+                beginAt = "elaboraret",
+                endAt = "adversarium",
+                fullName = "Evangelina Puckett",
                 id = 4446,
-                league_id = 7631,
-                modified_at = "quaerendum",
+                leagueId = 7631,
+                modifiedAt = "quaerendum",
                 name = "Alyce Russo",
                 season = "dolore",
                 slug = "iisque",
-                winner_id = 9714,
-                winner_type = "facilisi",
+                winnerId = 9714,
+                winnerType = "facilisi",
                 year = 2013
             ),
             serieId = 8028,
@@ -206,21 +206,21 @@ fun MatchItemPreview() {
             status = "volumus",
             streamsList = listOf(),
             tournament = Tournament(
-                begin_at = "signiferumque",
-                detailed_stats = false,
-                end_at = "quo",
-                has_bracket = false,
+                beginAt = "signiferumque",
+                detailedStats = false,
+                endAt = "quo",
+                hasBracket = false,
                 id = 4077,
-                league_id = 6103,
-                live_supported = false,
-                modified_at = "quem",
+                leagueId = 6103,
+                liveSupported = false,
+                modifiedAt = "quem",
                 name = "Sheryl Morrow",
                 prizepool = "scripserit",
-                serie_id = 9816,
+                serieId = 9816,
                 slug = "mutat",
                 tier = "eloquentiam",
-                winner_id = 6150,
-                winner_type = "duo"
+                winnerId = 6150,
+                winnerType = "duo"
             ),
             tournamentId = 4683,
             videogame = Videogame(
@@ -232,9 +232,9 @@ fun MatchItemPreview() {
             winner = WinnerX(
                 acronym = "",
                 id = 7493,
-                image_url = "https://duckduckgo.com/?q=deserunt",
+                imageUrl = "https://duckduckgo.com/?q=deserunt",
                 location = "quis",
-                modified_at = "auctor",
+                modifiedAt = "auctor",
                 name = "Ines Bryan",
                 slug = "curabitur"
             ),

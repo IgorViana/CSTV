@@ -2,7 +2,7 @@ package com.example.cstv.ui.screen.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cstv.model.matches.MatchResponse
+import com.example.cstv.networking.response.match.MatchResponse
 import com.example.cstv.repository.IMatchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

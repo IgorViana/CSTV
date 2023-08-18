@@ -1,7 +1,7 @@
 package com.example.cstv.repository
 
-import com.example.cstv.model.matches.MatchResponse
-import com.example.cstv.model.matches.MatchResponseItem
+import com.example.cstv.networking.response.match.MatchResponse
+import com.example.cstv.networking.response.match.MatchResponseItem
 import com.example.cstv.networking.MatchService
 import com.example.cstv.util.Result
 import kotlinx.coroutines.flow.Flow

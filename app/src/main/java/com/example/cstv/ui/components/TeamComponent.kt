@@ -15,13 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
-import com.example.cstv.model.matches.OpponentX
+import com.example.cstv.networking.response.match.OpponentX
 
 @Composable
 fun TeamComponent(modifier: Modifier = Modifier, model: OpponentX?) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         AsyncImage(
-            model = model?.image_url,
+            model = model?.imageUrl,
             contentDescription = "Team flag",
             modifier = Modifier.size(width = 53.dp, height = 60.dp),
             placeholder = painterResource(id = R.drawable.placeholder_icon),

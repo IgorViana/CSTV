@@ -3,7 +3,7 @@ package com.example.cstv.ui.screen.matchDetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cstv.model.DetailResponse
+import com.example.cstv.networking.response.detail.DetailResponse
 import com.example.cstv.repository.IMatchDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

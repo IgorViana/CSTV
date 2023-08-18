@@ -1,4 +1,4 @@
-package com.example.cstv.model.matches
+package com.example.cstv.networking.response.match
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
