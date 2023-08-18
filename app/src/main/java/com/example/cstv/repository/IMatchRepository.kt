@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface IMatchRepository {
 
-    fun getMatches(): Flow<Result<MatchListModel>>
+    fun getMatches(apiKey: String): Flow<Result<MatchListModel>>
 
-    fun getMatchById(matchId: Long): Flow<Result<MatchModel>>
+    fun getMatchById(matchId: Long, apiKey: String): Flow<Result<MatchModel>>
 }

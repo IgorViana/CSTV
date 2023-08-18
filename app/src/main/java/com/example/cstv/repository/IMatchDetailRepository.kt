@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IMatchDetailRepository {
 
-    fun getPlayersStatsByMatch(matchId: Long): Flow<Result<DetailModel>>
+    fun getPlayersStatsByMatch(matchId: Long, apiKey:String): Flow<Result<DetailModel>>
 }
