@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
-import com.example.cstv.networking.response.player.Player
+import com.example.cstv.model.player.PlayerModel
 
 @Composable
-fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
+fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: PlayerModel) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -42,7 +42,7 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = player.name, modifier = Modifier.padding(bottom = 8.dp),
+                text = player.name.orEmpty(), modifier = Modifier.padding(bottom = 8.dp),
                 style = TextStyle(
                     fontSize = 14.sp,
                     color = Color(0xFFFFFFFF)
@@ -50,7 +50,7 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
                 maxLines = 1
             )
             Text(
-                text = "${player.firstName} ${player.lastName}",
+                text = "${player.firstName.orEmpty()} ${player.lastName.orEmpty()}",
                 style = TextStyle(
                     fontSize = 12.sp,
                     color = Color(0xFF6C6B7E)
@@ -75,18 +75,12 @@ fun LeftSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
 @Composable
 fun LeftSidePlayerComponentPreview() {
     LeftSidePlayerComponent(
-        player = Player(
-            age = 0,
-            birthday = "",
-            firstName = null,
-            id = 0,
-            imageUrl = "",
-            lastName = null,
-            modifiedAt = "",
-            name = "",
-            nationality = "",
-            role = "",
-            slug = ""
+        player = PlayerModel(
+            firstName = "dummy",
+            lastName = "dummy",
+            imageUrl = "dummy",
+            slug = "dummy",
+            name = "dummy"
         )
     )
 }

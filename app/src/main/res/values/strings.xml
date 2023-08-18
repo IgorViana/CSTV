@@ -3,4 +3,6 @@
     <string name="partidas">Partidas</string>
     <string name="agora">AGORA</string>
     <string name="running">running</string>
+    <string name="erro_ao_carregar_dados">Erro ao carregar dados</string>
+    <string name="tente_novamente">Tente novamente</string>
 </resources>

@@ -1,8 +1,9 @@
 package com.example.cstv.repository
 
-import com.example.cstv.networking.response.detail.DetailResponse
+import com.example.cstv.model.detail.DetailModel
 import com.example.cstv.networking.MatchService
 import com.example.cstv.networking.PlayerService
+import com.example.cstv.util.Mapper
 import com.example.cstv.util.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -12,16 +13,20 @@ class MatchDetailRepositoryImpl(
     private val networking: PlayerService,
     private val matchNetworking: MatchService
 ) : IMatchDetailRepository {
-    override fun getPlayersStatsByMatch(matchId: Long): Flow<Result<DetailResponse>> = flow {
+    override fun getPlayersStatsByMatch(matchId: Long): Flow<Result<DetailModel>> = flow {
         emit(Result.Loading(true))
         try {
-            val player = networking.getPlayersByMatch(matchId)
-            val match = matchNetworking.getMatchById(matchId)
+            val playerResponse = networking.getPlayersByMatch(matchId)
+            val playerModel = Mapper().mapPlayerResponseToModel(playerResponse)
+
+            val matchResponse = matchNetworking.getMatchById(matchId)
+            val matchModel = Mapper().mapMatchResponseToModel(matchResponse)
+
             emit(
                 Result.Success(
-                    DetailResponse(
-                        playerDetailResponse = player,
-                        matchDetailResponse = match
+                    DetailModel(
+                        playerListModel = playerModel,
+                        matchModel = matchModel
                     )
                 )
             )

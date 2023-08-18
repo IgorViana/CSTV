@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
-import com.example.cstv.networking.response.player.Player
+import com.example.cstv.model.player.PlayerModel
 
 @Composable
-fun RightSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
+fun RightSidePlayerComponent(modifier: Modifier = Modifier, player: PlayerModel) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -34,7 +34,6 @@ fun RightSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
                 shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)
             )
     ) {
-        // TODO Make it rounded
         AsyncImage(
             model = player.imageUrl,
             contentDescription = "Players image",
@@ -54,7 +53,7 @@ fun RightSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = player.slug,
+                text = player.name.orEmpty(),
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = TextStyle(
                     fontSize = 14.sp,
@@ -77,18 +76,12 @@ fun RightSidePlayerComponent(modifier: Modifier = Modifier, player: Player) {
 @Composable
 fun RightSidePlayerComponentPreview() {
     RightSidePlayerComponent(
-        player = Player(
-            age = 0,
-            birthday = "",
-            firstName = null,
-            id = 0,
-            imageUrl = "",
-            lastName = null,
-            modifiedAt = "",
-            name = "",
-            nationality = "",
-            role = "",
-            slug = ""
+        player = PlayerModel(
+            firstName = "dummy",
+            lastName = "dummy",
+            imageUrl = "dummy",
+            slug = "dummy",
+            name = "dummy"
         )
     )
 }

@@ -3,7 +3,7 @@ package com.example.cstv.ui.screen.matchDetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cstv.networking.response.detail.DetailResponse
+import com.example.cstv.model.detail.DetailModel
 import com.example.cstv.repository.IMatchDetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,6 +44,6 @@ class MatchDetailViewModel @Inject constructor(
 
 data class DetailState(
     val isLoading: Boolean = false,
-    val detailResponse: DetailResponse? = null,
+    val detailResponse: DetailModel? = null,
     val error: String? = null
 )

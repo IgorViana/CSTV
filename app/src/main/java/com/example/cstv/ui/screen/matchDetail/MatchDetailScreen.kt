@@ -27,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.cstv.R
 import com.example.cstv.ui.components.LeftSidePlayerComponent
 import com.example.cstv.ui.components.LoadingComponent
 import com.example.cstv.ui.components.RightSidePlayerComponent
@@ -87,9 +89,9 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
             }
         }
 
-        state.value.detailResponse?.let { detailResponse ->
-            val team1 = detailResponse.matchDetailResponse.opponents?.getOrNull(0)?.opponent
-            val team2 = detailResponse.matchDetailResponse.opponents?.getOrNull(1)?.opponent
+        state.value.detailResponse?.let { detailModel ->
+            val team1 = detailModel.matchModel.teams?.getOrNull(0)
+            val team2 = detailModel.matchModel.teams?.getOrNull(1)
 
             Row(
                 modifier = Modifier
@@ -118,8 +120,8 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
 
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = if (detailResponse.matchDetailResponse.status == "running") "AGORA"
-                    else formatDate(detailResponse.matchDetailResponse.beginAt),
+                    text = if (detailModel.matchModel.status == "running") "AGORA"
+                    else formatDate(detailModel.matchModel.beginAt),
                     style = TextStyle(
                         fontSize = 12.sp,
                         color = Color(0xFFFFFFFF)
@@ -127,13 +129,13 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
                 )
             }
 
-            val opponents1 = detailResponse.playerDetailResponse.opponents.getOrNull(0)
-            val opponents2 = detailResponse.playerDetailResponse.opponents.getOrNull(1)
+            val player1 = detailModel.playerListModel.teams.getOrNull(0)
+            val player2 = detailModel.playerListModel.teams.getOrNull(1)
 
-            if (opponents1 != null && opponents2 != null) {
+            if (player1 != null && player2 != null) {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Column(modifier = Modifier.weight(1f)) {
-                        opponents1.players.forEach { player ->
+                        player1.players.forEach { player ->
                             LeftSidePlayerComponent(player = player)
                         }
                     }
@@ -141,7 +143,7 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
                     Spacer(modifier = Modifier.width(12.dp))
 
                     Column(modifier = Modifier.weight(1f)) {
-                        opponents2.players.forEach { player ->
+                        player2.players.forEach { player ->
                             RightSidePlayerComponent(player = player)
                         }
                     }
@@ -155,11 +157,11 @@ fun MatchDetailScreen(navController: NavController, matchId: Long, title: String
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "Erro ao carregar dados")
+                Text(text = stringResource(R.string.erro_ao_carregar_dados))
                 Button(onClick = {
                     viewModel.getPlayersStatsByMatchId(matchId)
                 }) {
-                    Text(text = "Tente novamente")
+                    Text(text = stringResource(R.string.tente_novamente))
                 }
             }
         }

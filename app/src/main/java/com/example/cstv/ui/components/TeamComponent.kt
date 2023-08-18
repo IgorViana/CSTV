@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.cstv.R
 import com.example.cstv.model.match.TeamModel
-import com.example.cstv.networking.response.match.OpponentX
 
 @Composable
 fun TeamComponent(modifier: Modifier = Modifier, model: TeamModel?) {
@@ -38,28 +37,6 @@ fun TeamComponent(modifier: Modifier = Modifier, model: TeamModel?) {
         )
     }
 }
-
-@Composable
-fun TeamComponent(modifier: Modifier = Modifier, model: OpponentX?) {
-    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        AsyncImage(
-            model = model?.imageUrl,
-            contentDescription = "Team flag",
-            modifier = Modifier.size(width = 53.dp, height = 60.dp),
-            placeholder = painterResource(id = R.drawable.placeholder_icon),
-            error = painterResource(id = R.drawable.placeholder_icon)
-        )
-        Text(
-            text = model?.name.orEmpty(),
-            modifier = Modifier.padding(top = 10.dp),
-            style = TextStyle(
-                fontSize = 10.sp,
-                color = Color(0xFFFFFFFF),
-            )
-        )
-    }
-}
-
 
 @Preview(showBackground = false)
 @Composable
